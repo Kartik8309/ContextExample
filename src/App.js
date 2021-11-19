@@ -1,23 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
+import DisplayController from './components/displayController';
+import FormController from './components/formController';
+import { useState } from 'react';
+import NameContextProvider from './Context/actions';
 
 function App() {
+  const [name, setName] = useState('');
+
+  const getName = (val) => {
+    setName(val);
+    console.log(name);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NameContextProvider>
+        <FormController getName={getName} />
+        <DisplayController Name={name} />
+      </NameContextProvider>
     </div>
   );
 }
